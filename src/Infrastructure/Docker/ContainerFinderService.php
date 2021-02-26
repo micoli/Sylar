@@ -34,11 +34,17 @@ final class ContainerFinderService implements ContainerFinderServiceInterface
             return null;
         }
 
-        return current(array_filter(
+        $filteredContainers = array_filter(
             $containers,
             function (ContainerSummaryItem $containerSummeryItem) use ($dockerName) {
                 return $containerSummeryItem->getNames()[0] === '/' . $dockerName;
             }
-        ));
+        );
+
+        if (empty($filteredContainers)) {
+            return null;
+        }
+
+        return current($filteredContainers);
     }
 }
