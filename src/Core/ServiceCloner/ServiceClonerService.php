@@ -90,9 +90,9 @@ final class ServiceClonerService implements ServiceClonerServiceInterface
         $this->assertStartServiceParameters($masterName, $instanceName, $index);
         try {
             $this->stop($masterName, $instanceName);
+            sleep(5);
         } catch (NonExistingServiceInstanceException | NonExistingServiceStateFileException | ContainerDeleteNotFoundException $exception) {
         }
-        sleep(5);
         $this->start($masterName, $instanceName, $index);
     }
 
